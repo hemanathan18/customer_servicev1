@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package OfficialNumber;
+
+import "google/api/annotations.proto";
+
+
+option go_package= "api/OfficialNumber";
+
+service OffPhoneService {
+  rpc CreateOffPhoneNumber(CreateOffPhoneNumberRequest) returns (CreateOffPhoneNumberResponse){
+   option (google.api.http) = {
+      post:"/off_phonenumbers"
+      body:"requestbody"
+    };
+  };
+
+  rpc GetOffPhoneNumber(GetOffPhoneNumberRequest) returns (GetOffPhoneNumberResponse){
+   option (google.api.http) = {
+      get: "/off_phonenumbers/{off_ph_id}"
+    };
+  };
+
+  rpc UpdateOffPhoneNumber(UpdateOffPhoneNumberRequest) returns (UpdateOffPhoneNumberResponse){
+   option (google.api.http) = {
+      put: "/off_phonenumbers/{off_ph_id}"
+      body:"requestbody"
+    };
+  };
+
+  rpc DeleteOffPhoneNumber(DeleteOffPhoneNumberRequest) returns (DeleteOffPhoneNumberResponse){
+   option (google.api.http) = {
+      delete: "/off_phonenumbers/{off_ph_id}"
+    };
+  };
+
+  rpc GetOffPhoneNumbers(GetOffPhoneNumbersRequest) returns (GetOffPhoneNumbersResponse){
+   option (google.api.http) = {
+      get: "/off_phonenumbers"
+    };
+  };
+}
+
+message CreateOffPhoneNumberRequest {
+  int64 country_code = 1;
+  int64 number = 2;
+
+  RequestBody requestbody=3;
+}
+
+message CreateOffPhoneNumberResponse {
+  uint64 off_ph_id = 1;
+}
+
+message GetOffPhoneNumberRequest {
+  uint64 off_ph_id = 1;
+}
+
+message GetOffPhoneNumberResponse {
+  uint64 off_ph_id = 1;
+  int64 country_code = 2;
+  int64 number = 3;
+}
+
+message UpdateOffPhoneNumberRequest {
+  uint64 off_ph_id = 1;
+  int64 country_code = 2;
+  int64 number = 3;
+
+  RequestBody requestbody=4;
+}
+
+message UpdateOffPhoneNumberResponse {
+  uint64 off_ph_id = 1;
+}
+
+message DeleteOffPhoneNumberRequest {
+  uint64 off_ph_id = 1;
+}
+
+message DeleteOffPhoneNumberResponse {
+  uint64 off_ph_id = 1;
+}
+
+message GetOffPhoneNumbersRequest{
+
+}
+
+message GetOffPhoneNumbersResponse{
+    repeated OffPhoneNumber offphonenumbers =1;
+}
+
+message OffPhoneNumber{
+  uint64 off_ph_id = 1;
+  int64 country_code = 2;
+  int64 number = 3;
+}
+
+message RequestBody {
+int64 country_code = 1;
+int64 number = 2;
+}

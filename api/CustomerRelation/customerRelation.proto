@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package CustomerRelation;
+
+import "google/api/annotations.proto";
+
+
+option go_package= "api/CustomerRelation";
+
+service CustomerRelationService {
+
+  rpc CreateCustomerRelation(CreateCustomerRelationRequest) returns (CreateCustomerRelationResponse){
+   option (google.api.http) = { 
+    post:"/customer_relations"
+    body: "requestbody"
+   };
+  };
+
+  rpc GetCustomerRelation(GetCustomerRelationRequest) returns (GetCustomerRelationResponse){
+   option (google.api.http) = {
+      get: "/customer_relations/{crId}"
+    };
+  };
+
+  rpc UpdateCustomerRelation(UpdateCustomerRelationRequest) returns (UpdateCustomerRelationResponse){
+   option (google.api.http) = { 
+    put:"/customer_relations/{crId}"
+    body: "requestbody"
+   };
+  };
+
+  rpc DeleteCustomerRelation(DeleteCustomerRelationRequest) returns (DeleteCustomerRelationResponse){
+   option (google.api.http) = {
+      delete: "/customer_relations/{crId}"
+    };
+  };
+
+  rpc GetCustomerRelations(GetCustomerRelationsRequest) returns (GetCustomerRelationsResponse){
+   option (google.api.http) = {
+      get: "/customer_relations"
+    };
+  };
+}
+
+message CreateCustomerRelationRequest {
+  RequestBody requestbody=1;
+}
+
+message CreateCustomerRelationResponse {
+  string message = 1;
+}
+
+message GetCustomerRelationRequest {
+  uint64 crId=1;
+}
+
+message GetCustomerRelationResponse {
+  uint64 crId=1;
+  uint64 customer_id=2;
+  uint64 off_em_id=3;
+  uint64 pers_em_id=4;
+  uint64 off_ph_id=5;
+  uint64 pers_ph_id=6;
+  uint64 temp_add_id=7;
+  uint64 perm_add_id=8;
+}
+
+message UpdateCustomerRelationRequest {
+  uint64 crId=1;
+  RequestBody requestbody=2;
+
+}
+
+message UpdateCustomerRelationResponse {
+  string message = 1;
+}
+
+message DeleteCustomerRelationRequest {
+  uint64 crId = 1;
+}
+
+message DeleteCustomerRelationResponse {
+  string message = 1;
+}
+
+message GetCustomerRelationsRequest{
+
+}
+
+message GetCustomerRelationsResponse{
+    repeated CustomerRelation customerrelations=1;
+}
+
+message CustomerRelation{
+  uint64 crId=1;
+  uint64 customer_id=2;
+  uint64 off_em_id=3;
+  uint64 pers_em_id=4;
+  uint64 off_ph_id=5;
+  uint64 pers_ph_id=6;
+  uint64 temp_add_id=7;
+  uint64 perm_add_id=8;
+}
+
+message RequestBody{
+  uint64 customer_id=1;
+  uint64 off_em_id=2;
+  uint64 pers_em_id=3;
+  uint64 off_ph_id=4;
+  uint64 pers_ph_id=5;
+  uint64 temp_add_id=6;
+  uint64 perm_add_id=7;
+}

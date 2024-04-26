@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package PersonalNumber;
+
+import "google/api/annotations.proto";
+
+
+option go_package= "api/PersonalNumber";
+
+service PersPhoneService {
+  rpc CreatePersPhoneNumber(CreatePersPhoneNumberRequest) returns (CreatePersPhoneNumberResponse){
+   option (google.api.http) = {
+      post: "/pers_phonenumbers"
+      body:"requestbody"
+    };
+  };
+
+  rpc GetPersPhoneNumber(GetPersPhoneNumberRequest) returns (GetPersPhoneNumberResponse){
+   option (google.api.http) = {
+      get: "/pers_phonenumbers/{pers_ph_id}"
+    };
+  };
+
+  rpc UpdatePersPhoneNumber(UpdatePersPhoneNumberRequest) returns (UpdatePersPhoneNumberResponse){
+   option (google.api.http) = {
+      put: "/pers_phonenumbers/{pers_ph_id}"
+      body:"requestbody"
+    };
+  };
+
+  rpc DeletePersPhoneNumber(DeletePersPhoneNumberRequest) returns (DeletePersPhoneNumberResponse){
+   option (google.api.http) = {
+      delete: "/pers_phonenumbers/{pers_ph_id}"
+    };
+  };
+
+  rpc GetPersPhoneNumbers(GetPersPhoneNumbersRequest) returns (GetPersPhoneNumbersResponse){
+   option (google.api.http) = {
+      get: "/pers_phonenumbers"
+    };
+  };
+
+}
+
+message CreatePersPhoneNumberRequest {
+  int32 country_code = 1;
+  int64 number = 2;
+
+  RequestBody requestbody=3;
+}
+
+message CreatePersPhoneNumberResponse {
+  uint64 pers_ph_id = 1;
+}
+
+message GetPersPhoneNumberRequest {
+  uint64 pers_ph_id = 1;
+}
+
+message GetPersPhoneNumberResponse {
+  uint64 pers_ph_id = 1;
+  int32 country_code = 2;
+  int64 number = 3;
+}
+
+message UpdatePersPhoneNumberRequest {
+  uint64 pers_ph_id = 1;
+  int32 country_code = 2;
+  int64 number = 3;
+
+  RequestBody requestbody=4;
+}
+
+message UpdatePersPhoneNumberResponse {
+  uint64 pers_ph_id = 1;
+}
+
+message DeletePersPhoneNumberRequest {
+  uint64 pers_ph_id = 1;
+}
+
+message DeletePersPhoneNumberResponse {
+  uint64 pers_ph_id = 1;
+}
+
+message GetPersPhoneNumbersRequest{
+
+}
+
+message GetPersPhoneNumbersResponse{
+    repeated PersPhoneNumber persphonenumbers =1;
+}
+
+message PersPhoneNumber{
+  uint64 pers_ph_id = 1;
+  int32 country_code = 2;
+  int64 number = 3;
+}
+
+message RequestBody{
+  int32 country_code = 1;
+  int64 number = 2;  
+}

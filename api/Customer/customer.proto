@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package Customer;
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+
+option go_package= "api/Customer";
+
+service CustomerService {
+  rpc CreateCustomer(CreateCustomerRequest) returns (CreateCustomerResponse){
+   option (google.api.http) = { 
+    post:"/customers"
+    body: "requestbody"
+   };
+  };
+
+  rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse){
+   option (google.api.http) = {
+      get: "/customers/{customerId}"
+    };
+  };
+
+  rpc UpdateCustomer(UpdateCustomerRequest) returns (UpdateCustomerResponse){
+   option (google.api.http) = { 
+    put:"/customers/{customerId}"
+    body: "requestbody"
+   };
+  };
+
+  rpc DeleteCustomer(DeleteCustomerRequest) returns (DeleteCustomerResponse){
+   option (google.api.http) = {
+      delete: "/customers/{customerId}"
+    };
+  };
+
+  rpc GetCustomers(GetCustomersRequest) returns (GetCustomersResponse){
+   option (google.api.http) = {
+      get: "/customers"
+    };
+  };
+}
+
+message CreateCustomerRequest {
+  string name = 1; 
+  string gender = 2;
+  string dob= 3;
+
+  RequestBody requestbody=4;
+}
+
+message CreateCustomerResponse {
+  string message = 1;
+}
+
+message GetCustomerRequest {
+  uint64 customerId = 1;
+}
+
+message GetCustomerResponse {
+  uint64 customerId=1;
+  string name = 2;
+  string gender = 3;
+  string dob = 4;
+}
+
+message UpdateCustomerRequest {
+  uint64 customerId = 1;
+  string name = 2;
+  string gender = 3;
+  string dob = 4;
+
+  RequestBody requestbody=5;
+
+}
+
+message UpdateCustomerResponse {
+  string message = 1;
+}
+
+message DeleteCustomerRequest {
+  uint64 customerId = 1;
+}
+
+message DeleteCustomerResponse {
+  bool success = 1;
+}
+
+message GetCustomersRequest{
+
+}
+
+message GetCustomersResponse{
+    repeated Customer customers=1;
+}
+
+message Customer{
+  uint64 customerId = 1;
+  string name = 2; 
+  string gender = 3;
+  string dob = 4;
+}
+
+message RequestBody{
+  string name=1 [(validate.rules).string.max_len=64];
+  string gender=2;
+  string dob=3;
+}

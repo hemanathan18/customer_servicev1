@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package PersonalMail;
+
+import "google/api/annotations.proto";
+
+option go_package= "api/PersonalMail";
+
+service PersMailService {
+  rpc CreatePersMail(CreatePersMailRequest) returns (CreatePersMailResponse){
+   option (google.api.http) = {
+      post: "/pers_mails"
+      body: "requestbody"
+    };
+  };
+
+  rpc GetPersMail(GetPersMailRequest) returns (GetPersMailResponse){
+   option (google.api.http) = {
+      get: "/pers_mails/{pers_em_id}"
+    };
+  };
+
+  rpc UpdatePersMail(UpdatePersMailRequest) returns (UpdatePersMailResponse){
+   option (google.api.http) = {
+      put: "/pers_mails/{pers_em_id}"
+      body: "requestbody"
+    };
+  };
+
+  rpc DeletePersMail(DeletePersMailRequest) returns (DeletePersMailResponse){
+   option (google.api.http) = {
+      delete: "/pers_mails/{pers_em_id}"
+    };
+  };
+
+  rpc GetPersMails(GetPersMailsRequest) returns (GetPersMailsResponse){
+   option (google.api.http) = {
+      get: "/pers_mails"
+    };
+  };
+  
+}
+
+message CreatePersMailRequest {
+  string email=1;
+
+  RequestBody requestbody=2;
+}
+
+message CreatePersMailResponse {
+  uint64 pers_em_id = 1;
+}
+
+message GetPersMailRequest {
+  uint64 pers_em_id = 1;
+}
+
+message GetPersMailResponse {
+  uint64 pers_em_id = 1;
+  string email=2;
+}
+
+message UpdatePersMailRequest {
+  uint64 pers_em_id = 1;
+  string email=2;
+
+  RequestBody requestbody=3;
+}
+
+message UpdatePersMailResponse {
+  uint64 pers_em_id = 1;
+}
+
+message DeletePersMailRequest {
+  uint64 pers_em_id = 1;
+}
+
+message DeletePersMailResponse {
+  uint64 pers_em_id = 1;
+}
+
+message GetPersMailsRequest{
+
+}
+
+message GetPersMailsResponse{
+    repeated PersMail persemails =1;
+}
+
+message PersMail{
+  uint64 pers_em_id = 1;
+  string email=2;
+}
+
+message RequestBody{
+  string email=2;
+}

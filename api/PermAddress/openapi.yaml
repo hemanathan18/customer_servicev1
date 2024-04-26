@@ -1,0 +1,278 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: PermAddressService API
+    version: 0.0.1
+paths:
+    /perm_addresses:
+        get:
+            tags:
+                - PermAddressService
+            operationId: PermAddressService_GetPermAddresses
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetPermAddressesResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - PermAddressService
+            operationId: PermAddressService_CreatePermAddress
+            parameters:
+                - name: doorNo
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: street
+                  in: query
+                  schema:
+                    type: string
+                - name: city
+                  in: query
+                  schema:
+                    type: string
+                - name: zipcode
+                  in: query
+                  schema:
+                    type: string
+                - name: state
+                  in: query
+                  schema:
+                    type: string
+                - name: country
+                  in: query
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreatePermAddressResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /perm_addresses/{permAddId}:
+        get:
+            tags:
+                - PermAddressService
+            operationId: PermAddressService_GetPermAddress
+            parameters:
+                - name: permAddId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetPermAddressResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - PermAddressService
+            operationId: PermAddressService_UpdatePermAddress
+            parameters:
+                - name: permAddId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: doorNo
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: street
+                  in: query
+                  schema:
+                    type: string
+                - name: city
+                  in: query
+                  schema:
+                    type: string
+                - name: zipcode
+                  in: query
+                  schema:
+                    type: string
+                - name: state
+                  in: query
+                  schema:
+                    type: string
+                - name: country
+                  in: query
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdatePermAddressResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - PermAddressService
+            operationId: PermAddressService_DeletePermAddress
+            parameters:
+                - name: permAddId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeletePermAddressResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        CreatePermAddressResponse:
+            type: object
+            properties:
+                permAddId:
+                    type: string
+        DeletePermAddressResponse:
+            type: object
+            properties:
+                permAddId:
+                    type: string
+        GetPermAddressResponse:
+            type: object
+            properties:
+                permAddId:
+                    type: string
+                doorNo:
+                    type: integer
+                    format: int32
+                street:
+                    type: string
+                city:
+                    type: string
+                zipcode:
+                    type: string
+                state:
+                    type: string
+                country:
+                    type: string
+        GetPermAddressesResponse:
+            type: object
+            properties:
+                permadresses:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/PermAddress'
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        PermAddress:
+            type: object
+            properties:
+                permAddId:
+                    type: string
+                doorNo:
+                    type: integer
+                    format: int32
+                street:
+                    type: string
+                city:
+                    type: string
+                zipcode:
+                    type: string
+                state:
+                    type: string
+                country:
+                    type: string
+        RequestBody:
+            type: object
+            properties:
+                doorNo:
+                    type: integer
+                    format: int32
+                street:
+                    type: string
+                city:
+                    type: string
+                zipcode:
+                    type: string
+                state:
+                    type: string
+                country:
+                    type: string
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        UpdatePermAddressResponse:
+            type: object
+            properties:
+                permAddId:
+                    type: string
+tags:
+    - name: PermAddressService

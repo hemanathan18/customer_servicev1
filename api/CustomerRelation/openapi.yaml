@@ -1,0 +1,230 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: CustomerRelationService API
+    version: 0.0.1
+paths:
+    /customer_relations:
+        get:
+            tags:
+                - CustomerRelationService
+            operationId: CustomerRelationService_GetCustomerRelations
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCustomerRelationsResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - CustomerRelationService
+            operationId: CustomerRelationService_CreateCustomerRelation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateCustomerRelationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /customer_relations/{crId}:
+        get:
+            tags:
+                - CustomerRelationService
+            operationId: CustomerRelationService_GetCustomerRelation
+            parameters:
+                - name: crId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCustomerRelationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - CustomerRelationService
+            operationId: CustomerRelationService_UpdateCustomerRelation
+            parameters:
+                - name: crId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateCustomerRelationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - CustomerRelationService
+            operationId: CustomerRelationService_DeleteCustomerRelation
+            parameters:
+                - name: crId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteCustomerRelationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        CreateCustomerRelationResponse:
+            type: object
+            properties:
+                message:
+                    type: string
+        CustomerRelation:
+            type: object
+            properties:
+                crId:
+                    type: string
+                customerId:
+                    type: string
+                offEmId:
+                    type: string
+                persEmId:
+                    type: string
+                offPhId:
+                    type: string
+                persPhId:
+                    type: string
+                tempAddId:
+                    type: string
+                permAddId:
+                    type: string
+        DeleteCustomerRelationResponse:
+            type: object
+            properties:
+                message:
+                    type: string
+        GetCustomerRelationResponse:
+            type: object
+            properties:
+                crId:
+                    type: string
+                customerId:
+                    type: string
+                offEmId:
+                    type: string
+                persEmId:
+                    type: string
+                offPhId:
+                    type: string
+                persPhId:
+                    type: string
+                tempAddId:
+                    type: string
+                permAddId:
+                    type: string
+        GetCustomerRelationsResponse:
+            type: object
+            properties:
+                customerrelations:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CustomerRelation'
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        RequestBody:
+            type: object
+            properties:
+                customerId:
+                    type: string
+                offEmId:
+                    type: string
+                persEmId:
+                    type: string
+                offPhId:
+                    type: string
+                persPhId:
+                    type: string
+                tempAddId:
+                    type: string
+                permAddId:
+                    type: string
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        UpdateCustomerRelationResponse:
+            type: object
+            properties:
+                message:
+                    type: string
+tags:
+    - name: CustomerRelationService

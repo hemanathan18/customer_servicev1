@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package PermAddress;
+
+import "google/api/annotations.proto";
+
+
+option go_package= "api/PermAddress";
+
+service PermAddressService {
+  rpc CreatePermAddress(CreatePermAddressRequest) returns (CreatePermAddressResponse){
+   option (google.api.http) = {
+      post: "/perm_addresses"
+      body: "requestbody"
+    };
+  };
+
+  rpc GetPermAddress(GetPermAddressRequest) returns (GetPermAddressResponse){
+   option (google.api.http) = {
+      get: "/perm_addresses/{perm_add_id}"
+    };
+  };
+
+  rpc UpdatePermAddress(UpdatePermAddressRequest) returns (UpdatePermAddressResponse){
+   option (google.api.http) = {
+      put: "/perm_addresses/{perm_add_id}"
+      body: "requestbody"
+    };
+  };
+
+  rpc DeletePermAddress(DeletePermAddressRequest) returns (DeletePermAddressResponse){
+   option (google.api.http) = {
+      delete: "/perm_addresses/{perm_add_id}"
+    };
+  };
+
+  rpc GetPermAddresses(GetPermAddressesRequest) returns (GetPermAddressesResponse){
+   option (google.api.http) = {
+      get: "/perm_addresses"
+    };
+  };
+}
+
+message CreatePermAddressRequest {
+  int32 door_no = 1;
+  string street = 2;
+  string city=3;
+  int64 zipcode=4;
+  string state=5;
+  string country=6;
+
+  RequestBody requestbody=7;
+}
+
+message CreatePermAddressResponse {
+  uint64 perm_add_id = 1;
+}
+
+message GetPermAddressRequest {
+  uint64 perm_add_id = 1;
+}
+
+message GetPermAddressResponse {
+  uint64 perm_add_id = 1;
+  int32 door_no = 2;
+  string street = 3;
+  string city=4;
+  int64 zipcode=5;
+  string state=6;
+  string country=7;
+}
+
+message UpdatePermAddressRequest {
+   uint64 perm_add_id = 1;
+  int32 door_no = 2;
+  string street = 3;
+  string city=4;
+  int64 zipcode=5;
+  string state=6;
+  string country=7;
+
+  RequestBody requestbody=8;
+}
+
+message UpdatePermAddressResponse {
+  uint64 perm_add_id = 1;
+}
+
+message DeletePermAddressRequest {
+  uint64 perm_add_id = 1;
+}
+
+message DeletePermAddressResponse {
+  uint64 perm_add_id = 1;
+}
+
+message GetPermAddressesRequest{
+
+}
+
+message GetPermAddressesResponse{
+    repeated PermAddress permadresses =1;
+}
+
+message PermAddress{
+  uint64 perm_add_id = 1;
+  int32 door_no = 2;
+  string street = 3;
+  string city=4;
+  int64 zipcode=5;
+  string state=6;
+  string country=7;
+}
+
+message RequestBody{
+  int32 door_no = 1;
+  string street = 2;
+  string city=3;
+  int64 zipcode=4;
+  string state=5;
+  string country=6;
+}

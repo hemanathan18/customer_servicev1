@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package OfficialMail;
+
+import "google/api/annotations.proto";
+
+
+option go_package= "api/OfficialMail";
+
+service OffMailService {
+  rpc CreateOffMail(CreateOffMailRequest) returns (CreateOffMailResponse){
+   option (google.api.http) = {
+      post: "/off_mails"
+      body:"requestbody"
+    };
+  };
+
+  rpc GetOffMail(GetOffMailRequest) returns (GetOffMailResponse){
+   option (google.api.http) = {
+      get: "/off_mails/{off_em_id}"
+    };
+  };
+
+  rpc UpdateOffMail(UpdateOffMailRequest) returns (UpdateOffMailResponse){
+   option (google.api.http) = {
+      put: "/off_mails/{off_em_id}"
+      body:"requestbody"
+    };
+  };
+
+  rpc DeleteOffMail(DeleteOffMailRequest) returns (DeleteOffMailResponse){
+   option (google.api.http) = {
+      delete: "/off_mails/{off_em_id}"
+    };
+  };
+  rpc GetOffMails(GetOffMailsRequest) returns (GetOffMailsResponse){
+   option (google.api.http) = {
+      get: "/off_mails"
+    };
+  };
+}
+
+message CreateOffMailRequest {
+ string email=1;
+ RequestBody requestbody=2;
+
+}
+
+message CreateOffMailResponse {
+  uint64 off_em_id = 1;
+}
+
+message GetOffMailRequest {
+  uint64 off_em_id = 1;
+}
+
+message GetOffMailResponse {
+  uint64 off_em_id = 1;
+  string email=2;
+}
+
+message UpdateOffMailRequest {
+  uint64 off_em_id = 1;
+  string email=2;
+
+  RequestBody requestbody=3;
+
+}
+
+message UpdateOffMailResponse {
+  uint64 off_em_id = 1;
+}
+
+message DeleteOffMailRequest {
+  uint64 off_em_id = 1;
+}
+
+message DeleteOffMailResponse {
+  uint64 off_em_id = 1;
+}
+
+message GetOffMailsRequest{
+
+}
+
+message GetOffMailsResponse{
+    repeated OffMail offemails =1;
+}
+
+message OffMail{
+  uint64 off_em_id = 1;
+  string email=2;
+}
+
+message RequestBody{
+  string email=1;
+}

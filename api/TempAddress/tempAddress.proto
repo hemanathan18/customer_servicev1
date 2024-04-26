@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package TempAddress;
+
+import "google/api/annotations.proto";
+
+
+option go_package= "api/TempAddress";
+
+service TempAddressService {
+  rpc CreateTempAddress(CreateTempAddressRequest) returns (CreateTempAddressResponse){
+   option (google.api.http) = {
+      post: "/temp_addresses"
+      body: "requestbody"
+    };
+  };
+
+  rpc GetTempAddress(GetTempAddressRequest) returns (GetTempAddressResponse){
+   option (google.api.http) = {
+      get: "/temp_addresses/{temp_add_id}"
+    };
+  };
+
+  rpc UpdateTempAddress(UpdateTempAddressRequest) returns (UpdateTempAddressResponse){
+   option (google.api.http) = {
+      put: "/temp_addresses/{temp_add_id}"
+      body: "requestbody"
+    };
+  };
+
+  rpc DeleteTempAddress(DeleteTempAddressRequest) returns (DeleteTempAddressResponse){
+   option (google.api.http) = {
+      delete: "/temp_addresses/{temp_add_id}"
+    };
+  };
+
+  rpc GetTempAddresses(GetTempAddressesRequest) returns (GetTempAddressesResponse){
+   option (google.api.http) = {
+      get: "/temp_addresses"
+    };
+  };
+}
+
+message CreateTempAddressRequest {
+  int32 door_no = 1;
+  string street = 2;
+  string city=3;
+  int64 zipcode=4;
+  string state=5;
+  string country=6;
+
+  RequestBody requestbody=7;
+}
+
+message CreateTempAddressResponse {
+  uint64 temp_add_id = 1;
+}
+
+message GetTempAddressRequest {
+  uint64 temp_add_id = 1;
+}
+
+message GetTempAddressResponse {
+  uint64 temp_add_id = 1;
+  int32 door_no = 2;
+  string street = 3;
+  string city=4;
+  int64 zipcode=5;
+  string state=6;
+  string country=7;
+}
+
+message UpdateTempAddressRequest {
+  uint64 temp_add_id = 1;
+  int32 door_no = 2;
+  string street = 3;
+  string city=4;
+  int64 zipcode=5;
+  string state=6;
+  string country=7;
+
+  RequestBody requestbody=8;
+}
+
+message UpdateTempAddressResponse {
+  uint64 temp_add_id = 1;
+}
+
+message DeleteTempAddressRequest {
+  uint64 temp_add_id = 1;
+}
+
+message DeleteTempAddressResponse {
+  uint64 temp_add_id = 1;
+}
+
+message GetTempAddressesRequest{
+
+}
+
+message GetTempAddressesResponse{
+    repeated TempAddress tempadresses =1;
+}
+
+message TempAddress{
+  uint64 temp_add_id = 1;
+  int32 door_no = 2;
+  string street = 3;
+  string city=4;
+  int64 zipcode=5;
+  string state=6;
+  string country=7;
+}
+
+message RequestBody{
+  int32 door_no = 1;
+  string street = 2;
+  string city=3;
+  int64 zipcode=4;
+  string state=5;
+  string country=6;
+}
